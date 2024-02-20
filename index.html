@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Person Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #030303;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 1px 17px 9px #eb87ba;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #eb87ba;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #eb87ba;
+        }
+
+        .food-container, .dessert-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .food-img, .dessert-img {
+            max-width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        #final-submit-details {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @keyframes moveNoButton {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .moving-no-button {
+            animation: moveNoButton 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question" id="favorite-person-question">
+            <h1>Who is your favorite person?</h1>
+            <form id="quiz-form">
+                <label for="person">Enter your name:</label>
+                <input type="text" id="person" required>
+                <p>Would you like to win a date with me?</p>
+                <button id="date-yes-btn" type="button">Yes</button>
+                <button id="date-no-btn" type="button" onclick="moveButton()" disabled>No</button>
+            </form>
+        </div>
+        
+        <div class="question" id="date-question" style="display: none;">
+            <h1>Choose a date and time:</h1>
+            <input type="datetime-local" id="date-time">
+            <button id="date-submit-btn" type="button">Submit</button>
+        </div>
+        <div class="question" id="food-question" style="display: none;">
+            <h1>What would you like to have for dinner?</h1>
+            <p>Choose from the options below:</p>
+            <div class="food-container">
+                <label>
+                    <input type="checkbox" value="pizza" style="display: none;">
+                    <p>Pizza</p>
+                    <img src="img/1.jpg" alt="Pizza" class="food-img" data-value="pizza">
+                </label>
+                <label>
+                    <input type="checkbox" value="pasta" style="display: none;">
+                    <p>Pasta</p>
+                    <img src="img/2.jpg" alt="Pasta" class="food-img" data-value="pasta">
+                </label>
+                <label>
+                    <input type="checkbox" value="burger" style="display: none;">
+                    <p>Burger</p>
+                    <img src="img/3.jpg" alt="Burger" class="food-img" data-value="burger">
+                </label>
+                <label>
+                    <input type="checkbox" value="kacci_biryani" style="display: none;">
+                    <p>Kacci Biryani</p>
+                    <img src="img/4.jpg" alt="Kacci Biryani" class="food-img" data-value="kacci_biryani">
+                </label>
+                <label>
+                    <input type="checkbox" value="Me!!!!🥹" style="display: none;">
+                    <p>Me</p>
+                    <img src="img/5.jpg" alt="Me" class="food-img" data-value="me">
+                </label>
+                <label>
+                    <input type="checkbox" value="fuckha" style="display: none;">
+                    <p>Fuckha</p>
+                    <img src="img/6.jpg" alt="Fuckha" class="food-img" data-value="fucha">
+                </label>
+            </div>
+            <button id="food-submit-btn" type="button">Submit</button>
+        </div>
+        <div class="question" id="dessert-question" style="display: none;">
+            <h1>Would you like to have dessert?</h1>
+            <p>Choose from the options below:</p>
+            <div class="dessert-container">
+                <label>
+                    <input type="checkbox" value="cake" style="display: none;">
+                    <p>Cake</p>
+                    <img src="img/01.jpg" alt="Cake" class="dessert-img" data-value="cake">
+                </label>
+                <label>
+                    <input type="checkbox" value="ice-cream" style="display: none;">
+                    <p>Ice Cream</p>
+                    <img src="img/02.jpg" alt="Ice Cream" class="dessert-img" data-value="ice-cream">
+                </label>
+                <label>
+                    <input type="checkbox" value="cookies" style="display: none;">
+                    <p>Cookies</p>
+                    <img src="img/03.jpg" alt="Cookies" class="dessert-img" data-value="cookies">
+                </label>
+                <label>
+                    <input type="checkbox" value="pudding" style="display: none;">
+                    <p>Pudding</p>
+                    <img src="img/04.jpg" alt="Pudding" class="dessert-img" data-value="pudding">
+                </label>
+                <label>
+                    <input type="checkbox" value="tiramisu" style="display: none;">
+                    <p>Tiramisu</p>
+                    <img src="img/05.jpg" alt="Tiramisu" class="dessert-img" data-value="tiramisu">
+                </label>
+                <label>
+                    <input type="checkbox" value="custard" style="display: none;">
+                    <p>Custard</p>
+                    <img src="img/06.jpg" alt="Custard" class="dessert-img" data-value="custard">
+                </label>
+            </div>
+            <button id="dessert-submit-btn" type="button">Submit</button>
+        </div>
+        <div class="question" id="activity-question" style="display: none;">
+            <h1>What would you like to do after dinner?</h1>
+            <input type="text" id="activity">
+            <button id="activity-submit-btn" type="button">Submit</button>
+        </div>
+        <div class="question" id="gf-question" style="display: none;">
+            <h1>Would you like to be mine</h1>
+            <button id="gf-submit-btn" type="button">Yes, I would love to!</button>
+        </div>
+        <div id="final-submit-details" style="display: none;">
+            <!-- Final submission details will be displayed here -->
+        </div>
+        <button id="final-submit-btn" type="submit" style="display: none;">Submit</button>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noButton = document.getElementById('date-no-btn');
+            if (!noButton.classList.contains('moving-no-button')) {
+                var x = Math.random() * (window.innerWidth - noButton.offsetWidth) - 85;
+                var y = Math.random() * (window.innerHeight - noButton.offsetHeight) - 48;
+                noButton.style.left = `${x}px`;
+                noButton.style.top = `${y}px`;
+                noButton.disabled = true; // Disable the button while it's moving
+                setTimeout(function() {
+                    noButton.disabled = false; // Re-enable the button after animation ends
+                }, 500);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.question');
+            const selectedOptions = {};
+
+            let currentQuestionIndex = 0;
+
+            function showNextQuestion() {
+                questions[currentQuestionIndex].style.display = 'none';
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    questions[currentQuestionIndex].style.display = 'block';
+                } else {
+                    document.getElementById('final-submit-details').innerHTML = generateFinalSubmissionDetails();
+                    document.getElementById('final-submit-details').style.display = 'block';
+                    document.getElementById('final-submit-btn').style.display = 'block';
+                }
+            }
+
+            function generateFinalSubmissionDetails() {
+                let detailsHTML = '<h1>I remind you again🥺🥺🥺</h1>';
+                detailsHTML += '<ul>';
+
+                for (const [question, answer] of Object.entries(selectedOptions)) {
+                    if (question === 'Wish to be my girlfriend') {
+                        detailsHTML += `<li><strong>Would you like to be mine:</strong> ${answer}</li>`;
+                    } else {
+                        detailsHTML += `<li><strong>${question}:</strong> ${answer}</li>`;
+                    }
+                }
+
+                detailsHTML += '</ul>';
+
+                return detailsHTML;
+            }
+
+            function animateNoButton() {
+                const noButton = document.getElementById('date-no-btn');
+                noButton.classList.add('moving-no-button'); // Add the CSS class to start the animation
+                setTimeout(() => {
+                    noButton.classList.remove('moving-no-button'); // Remove the CSS class after animation ends
+                }, 500);
+            }
+
+            document.getElementById('date-yes-btn').addEventListener('click', function() {
+                selectedOptions['Win a date'] = 'Yes';
+                showNextQuestion();
+                document.getElementById('date-no-btn').disabled = false; // Enable the "No" button after clicking "Yes"
+            });
+
+            document.getElementById('date-no-btn').addEventListener('click', function() {
+                selectedOptions['Win a date'] = 'No';
+                animateNoButton();
+                showNextQuestion();
+            });
+
+            document.getElementById('date-submit-btn').addEventListener('click', function() {
+                const dateTime = document.getElementById('date-time').value;
+                selectedOptions['Date and Time'] = dateTime;
+                showNextQuestion();
+            });
+
+            document.getElementById('food-submit-btn').addEventListener('click', function() {
+                const foodOptions = document.querySelectorAll('#food-question input[type="checkbox"]:checked');
+                selectedOptions['Dinner'] = Array.from(foodOptions).map(option => option.value);
+                showNextQuestion();
+            });
+
+            document.getElementById('dessert-submit-btn').addEventListener('click', function() {
+                const dessertOptions = document.querySelectorAll('#dessert-question input[type="checkbox"]:checked');
+                selectedOptions['Dessert'] = Array.from(dessertOptions).map(option => option.nextElementSibling.textContent);
+                showNextQuestion();
+            });
+
+            document.getElementById('activity-submit-btn').addEventListener('click', function() {
+                const activity = document.getElementById('activity').value;
+                selectedOptions['After Dinner Activity'] = activity;
+                showNextQuestion();
+            });
+
+            document.getElementById('gf-submit-btn').addEventListener('click', function() {
+                selectedOptions['Wish to be my girlfriend'] = 'Yes';
+                showNextQuestion();
+            });
+
+            document.getElementById('person').addEventListener('change', function() {
+                const name = document.getElementById('person').value;
+                selectedOptions['Name'] = name;
+            });
+
+            document.getElementById('final-submit-btn').addEventListener('click', function() {
+                // Prepare form data
+                const formData = new FormData();
+                for (const [key, value] of Object.entries(selectedOptions)) {
+                    formData.append(key, value);
+                }
+                // Submit the form data to Formspree.io
+                fetch('https://formspree.io/f/xleqddrz', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Form submitted successfully:', data);
+                    // Optionally, you can display a success message to the user
+                    alert('Form submitted successfully!');
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                    // Optionally, you can display an error message to the user
+                    alert('An error occurred while submitting the form. Please try again later.');
+                });
+            });
+
+            // Add event listeners to food images for automatic submission
+            const foodImages = document.querySelectorAll('.food-img');
+            foodImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    const checkbox = img.parentElement.querySelector('input[type="checkbox"]');
+                    checkbox.checked = true;
+                    document.getElementById('food-submit-btn').click();
+                });
+            });
+
+            // Add event listeners to dessert images for automatic submission
+            const dessertImages = document.querySelectorAll('.dessert-img');
+            dessertImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    const checkbox = img.parentElement.querySelector('input[type="checkbox"]');
+                    checkbox.checked = true;
+                    document.getElementById('dessert-submit-btn').click();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
